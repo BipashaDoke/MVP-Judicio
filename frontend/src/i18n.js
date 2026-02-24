@@ -1,0 +1,147 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+const resources = {
+  en: {
+    translation: {
+      appName: 'JUDICIO',
+      appTagline: 'Smart Court Order Intelligence System',
+      home: 'Home',
+      upload: 'Upload',
+      results: 'Results',
+      uploadTitle: 'Upload Court Order',
+      uploadDescription: 'Upload a PDF court order document for AI-powered analysis.',
+      dragDropText: 'Drag & drop your PDF here, or click to browse',
+      supportedFormats: '(PDF only, max 10MB)',
+      caseNumber: 'Case Number',
+      parties: 'Parties',
+      judgmentOutcome: 'Judgment Outcome',
+      importantDates: 'Important Dates',
+      legalDirections: 'Legal Directions',
+      riskTags: 'Risk Tags',
+      timeline: 'Timeline',
+      highRisk: 'High Risk',
+      mediumRisk: 'Medium Risk',
+      lowRisk: 'Low Risk',
+      professionalSummary: 'Professional Summary',
+      citizenExplanation: 'Citizen Explanation',
+      selectLanguage: 'Select Language',
+      analyzingDocument: 'Analyzing document...',
+      extractingText: 'Extracting text and analyzing with AI...',
+      processingAI: 'Processing with AI...',
+      uploadError: 'Error uploading file',
+      processError: 'Error processing document',
+      invalidFileType: 'Invalid file type. Please upload a PDF.',
+      uploadSuccess: 'File uploaded successfully!',
+      analysisComplete: 'Analysis complete!',
+      aboutJudicio: 'About JUDICIO',
+      version: 'Version',
+      contactUs: 'Contact Us',
+      downloadReport: 'Download Report',
+      newAnalysis: 'New Analysis',
+      shareResults: 'Share Results',
+      totalAnalyses: 'Total Analyses',
+      pendingAnalyses: 'Pending Analyses',
+      completedToday: 'Completed Today'
+    }
+  },
+  hi: {
+    translation: {
+      appName: 'JUDICIO',
+      appTagline: 'स्मार्ट कोर्ट ऑर्डर इंटेलिजेंस सिस्टम',
+      home: 'होम',
+      upload: 'अपलोड',
+      results: 'परिणाम',
+      uploadTitle: 'कोर्ट ऑर्डर अपलोड करें',
+      uploadDescription: 'AI-संचालित विश्लेषण के लिए PDF कोर्ट ऑर्डर दस्तावेज़ अपलोड करें।',
+      dragDropText: 'यहां PDF ड्रैग और ड्रॉप करें या क्लिक करें',
+      supportedFormats: '(केवल PDF, अधिकतम 10MB)',
+      caseNumber: 'मुकदमा संख्या',
+      parties: 'पक्ष',
+      judgmentOutcome: 'निर्णय परिणाम',
+      importantDates: 'महत्वपूर्ण तारीखें',
+      legalDirections: 'कानूनी निर्देश',
+      riskTags: 'जोखिम टैग',
+      timeline: 'टाइमलाइन',
+      highRisk: 'उच्च जोखिम',
+      mediumRisk: 'मध्यम जोखिम',
+      lowRisk: 'कम जोखिम',
+      professionalSummary: 'पेशेवर सारांश',
+      citizenExplanation: 'नागरिक स्पष्टीकरण',
+      selectLanguage: 'भाषा चुनें',
+      analyzingDocument: 'दस्तावेज़ का विश्लेषण हो रहा है...',
+      extractingText: 'पाठ निकाला जा रहा है और AI के साथ विश्लेषण किया जा रहा है...',
+      processingAI: 'AI के साथ प्रोसेसिंग हो रही है...',
+      uploadError: 'फाइल अपलोड करने में त्रुटि',
+      processError: 'दस्तावेज़ प्रोसेस करने में त्रुटि',
+      invalidFileType: 'अमान्य फाइल प्रकार। कृपया PDF अपलोड करें।',
+      uploadSuccess: 'फाइल सफलतापूर्वक अपलोड हुई!',
+      analysisComplete: 'विश्लेषण पूर्ण!',
+      aboutJudicio: 'JUDICIO के बारे में',
+      version: 'संस्करण',
+      contactUs: 'संपर्क करें',
+      downloadReport: 'रिपोर्ट डाउनलोड करें',
+      newAnalysis: 'नया विश्लेषण',
+      shareResults: 'परिणाम साझा करें',
+      totalAnalyses: 'कुल विश्लेषण',
+      pendingAnalyses: 'लंबित विश्लेषण',
+      completedToday: 'आज पूर्ण'
+    }
+  },
+  mr: {
+    translation: {
+      appName: 'JUDICIO',
+      appTagline: 'स्मार्ट कोर्ट ऑर्डर इंटेलिजेंस सिस्टम',
+      home: 'होम',
+      upload: 'अपलोड',
+      results: 'निकाल',
+      uploadTitle: 'कोर्ट ऑर्डर अपलोड करा',
+      uploadDescription: 'AI-शक्तीवर आधारित विश्लेषणासाठी PDF कोर्ट ऑर्डर दस्तावेज अपलोड करा.',
+      dragDropText: 'येथे PDF ड्रॅग आणि ड्रॉप करा किंवा क्लिक करा',
+      supportedFormats: '(फक्त PDF, जास्तीत जास्त 10MB)',
+      caseNumber: 'खटला क्रमांक',
+      parties: 'पक्ष',
+      judgmentOutcome: 'निर्णय निकाल',
+      importantDates: 'महत्वाच्या तारखा',
+      legalDirections: 'कायदेशीर सूचना',
+      riskTags: 'धोके टॅग',
+      timeline: 'कालरेखा',
+      highRisk: 'जास्त धोका',
+      mediumRisk: 'मध्यम धोका',
+      lowRisk: 'कमी धोका',
+      professionalSummary: 'व्यावसायिक सारांश',
+      citizenExplanation: 'नागरिक स्पष्टीकरण',
+      selectLanguage: 'भाषा निवडा',
+      analyzingDocument: 'दस्तावेजाचे विश्लेषण होत आहे...',
+      extractingText: 'मजकूर काढला जात आहे आणि AI सोबत विश्लेषण केले जात आहे...',
+      processingAI: 'AI सोबत प्रक्रिया होत आहे...',
+      uploadError: 'फाइल अपलोड करताना त्रुटी',
+      processError: 'दस्तावेज प्रक्रिया करताना त्रुटी',
+      invalidFileType: 'अवैध फाइल प्रकार. कृपया PDF अपलोड करा.',
+      uploadSuccess: 'फाइल यशस्वीपणे अपलोड झाली!',
+      analysisComplete: 'विश्लेषण पूर्ण!',
+      aboutJudicio: 'JUDICIO बद्दल',
+      version: 'आवृत्ती',
+      contactUs: 'संपर्क करा',
+      downloadReport: 'रिपोर्ट डाउनलोड करा',
+      newAnalysis: 'नवीन विश्लेषण',
+      shareResults: 'निकाल शेअर करा',
+      totalAnalyses: 'एकूण विश्लेषण',
+      pendingAnalyses: 'प्रलंबित विश्लेषण',
+      completedToday: 'आज पूर्ण झाले'
+    }
+  }
+};
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: 'en',
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false
+    }
+  });
+
+export default i18n;

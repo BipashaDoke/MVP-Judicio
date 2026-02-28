@@ -33,12 +33,14 @@ Analyze the court order and extract:
 1. language_detected: Detect the primary language of the document (english/hindi/marathi/other)
 
 2. metadata:
-   - case_number: The official case number
-   - parties: List of all parties involved
-   - judgment_outcome: The final judgment/decision
-   - important_dates: Key dates mentioned
-   - legal_directions: Specific directions/orders
-   - risk_tags: Risk assessment tags
+   - case_number: The official case number (string)
+   - parties: List of all parties involved (strings)
+   - judgment_outcome: The final judgment/decision. **Provide translations** as an object with keys `english`, `hindi`, and `marathi`.
+   - important_dates: An array of objects, each containing:
+       * date: the date string
+       * description: a description of the event. **Provide translations** (english/hindi/marathi) for the description.
+   - legal_directions: Array of directions or orders. Each item should include translations (english/hindi/marathi).
+   - risk_tags: Array of risk assessment tags; each tag should include translations (english/hindi/marathi).
 
 3. summary (Professional legal summary):
    - english: Summary in English

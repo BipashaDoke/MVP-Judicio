@@ -24,7 +24,8 @@ class Party(BaseModel):
 class ImportantDate(BaseModel):
     """Important date with description"""
     date: str
-    description: str
+    # description may be a simple string or a multilingual object
+    description: Any
 
 
 class LegalMetadata(BaseModel):
@@ -33,8 +34,9 @@ class LegalMetadata(BaseModel):
     parties: Optional[Party] = Field(default_factory=Party, description="Petitioner and respondent")
     judgment_outcome: Optional[str] = Field(None, description="Outcome of the judgment")
     important_dates: List[ImportantDate] = Field(default_factory=list, description="Key dates in the case")
-    legal_directions: List[str] = Field(default_factory=list, description="Directions given by the court")
-    risk_tags: List[str] = Field(default_factory=list, description="Risk assessment tags")
+    # allow legal directions and risk tags to be either simple strings or multilingual objects
+    legal_directions: List[Any] = Field(default_factory=list, description="Directions given by the court")
+    risk_tags: List[Any] = Field(default_factory=list, description="Risk assessment tags")
 
 
 class Summary(BaseModel):

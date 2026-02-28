@@ -113,9 +113,22 @@ function App() {
       return 'bg-red-100 text-red-800 border-red-200';
     } else if (riskLower.includes('medium') || riskLower.includes('मध्यम') || riskLower.includes('मध्यम')) {
       return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    } else {
+    } else if (riskLower.includes('low') || riskLower.includes('कमी')) {
       return 'bg-green-100 text-green-800 border-green-200';
+    } else {
+      return 'bg-gray-100 text-gray-800 border-gray-200';
     }
+  };
+
+  // helper to display multilingual fields returned from backend
+  const getLocalizedText = (field) => {
+    if (!field) return '';
+    if (typeof field === 'string') return field; // already a string
+    // field is expected to be an object like { english: '...', hindi: '...', marathi: '...' }
+    // i18n.language may be 'en','hi','mr' so map to keys
+    const langMap = { en: 'english', hi: 'hindi', mr: 'marathi' };
+    const key = langMap[i18n.language] || i18n.language;
+    return field[key] || field.english || Object.values(field)[0] || '';
   };
 
   return (
@@ -270,18 +283,22 @@ function App() {
               {/* Judgment Outcome */}
               <div className="bg-white rounded-2xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('judgmentOutcome')}</h3>
-                <p className="text-slate-600">{result.judgment_outcome || result.judgmentOutcome || 'N/A'}</p>
+                <p className="text-slate-600">{getLocalizedText(result.judgment_outcome) || getLocalizedText(result.judgmentOutcome) || 'N/A'}</p>
               </div>
 
               {/* Risk Tags */}
               <div className="bg-white rounded-2xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('riskTags')}</h3>
                 <div className="flex flex-wrap gap-2">
-                  {result.risk_tags?.map((tag, index) => (
-                    <span key={index} className={`px-3 py-1 rounded-full text-sm font-medium border ${getRiskColor(tag)}`}>
-                      {tag}
-                    </span>
-                  ))}
+                  {result.risk_tags?.map((tag, index) => {
+                    // tag may be string or object with language keys
+                    const display = typeof tag === 'object' ? getLocalizedText(tag) : tag;
+                    return (
+                      <span key={index} className={`px-3 py-1 rounded-full text-sm font-medium border ${getRiskColor(display)}`}>
+                        {display}
+                      </span>
+                    );
+                  })}
                   {(!result.risk_tags || result.risk_tags.length === 0) && (
                     <span className="text-slate-400">No risk tags detected</span>
                   )}
@@ -301,7 +318,7 @@ function App() {
                         <div className="absolute left-2 w-4 h-4 bg-blue-500 rounded-full border-2 border-white"></div>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                           <p className="font-medium text-slate-800">{dateItem.date}</p>
-                          <p className="text-slate-600 text-sm">{dateItem.description}</p>
+                          <p className="text-slate-600 text-sm">{getLocalizedText(dateItem.description)}</p>
                         </div>
                       </div>
                     ))}
@@ -317,10 +334,11 @@ function App() {
                 <ul className="space-y-3">
                   {result.legal_directions.map((direction, index) => (
                     <li key={index} className="flex items-start space-x-3">
+                      {/* direction may be multilingual object */}
+                      <span>{getLocalizedText(direction)}</span>
                       <svg className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span className="text-slate-600">{direction}</span>
                     </li>
                   ))}
                 </ul>
@@ -332,7 +350,7 @@ function App() {
               <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('professionalSummary')}</h3>
               <div className="prose prose-slate max-w-none">
                 <p className="text-slate-600 leading-relaxed">
-                  {result.professional_summary || result.professionalSummary || 'No summary available'}
+                  {getLocalizedText(result.professional_summary) || getLocalizedText(result.professionalSummary) || 'No summary available'}
                 </p>
               </div>
             </div>
@@ -341,7 +359,7 @@ function App() {
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6 border border-blue-100">
               <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('citizenExplanation')}</h3>
               <p className="text-slate-600 leading-relaxed">
-                {result.citizen_explanation || result.citizenExplanation || 'No explanation available'}
+                {getLocalizedText(result.citizen_explanation) || getLocalizedText(result.citizenExplanation) || 'No explanation available'}
               </p>
             </div>
 

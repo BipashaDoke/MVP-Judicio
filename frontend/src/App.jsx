@@ -332,7 +332,7 @@ const AnalyzePage = ({ t, i18n }) => {
     formData.append('file', file);
     try {
       setLoadingMessage(t('extractingText'));
-      const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         timeout: 120000
       });

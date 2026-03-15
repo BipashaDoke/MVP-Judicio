@@ -73,7 +73,7 @@ class GeminiService:
         if GEMINI_API_KEY:
             try:
                 # Determine model name at initialization (pick up new .env values)
-                model_name = os.getenv("GEMINI_MODEL", "gemini-pro")
+                model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
                 self.logger.info("Initializing Gemini model: %s", model_name)
                 self.model = genai.GenerativeModel(model_name)
             except Exception as e:
